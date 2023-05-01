@@ -3,6 +3,7 @@ const Numbers = (p) => {
     return (
       <p key={i}>
         {ob.name}: {ob.number}
+        <button onClick={p.delPers(ob.id, ob.name)}>delete</button>
       </p>
     );
   });
@@ -12,6 +13,7 @@ const Numbers = (p) => {
     .map((obb, i) => (
       <p key={i}>
         {obb.name}: {obb.number}
+        <button onClick={p.delPers(obb.id, obb.name)}>delete</button>
       </p>
     ));
 

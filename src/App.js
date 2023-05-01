@@ -59,6 +59,25 @@ const App = () => {
     }
   };
 
+  const delPers = (ind, nn) => {
+    const delAct = () => {
+      if (window.confirm(`Delete ${nn}?`)) {
+        prsService
+          .delPerson(ind)
+          .then((response) => {
+            console.log("promise deleted");
+            prsService.getAll().then((response) => {
+              setPersons(response.data);
+            });
+          })
+          .catch((error) => {
+            console.log("fail del");
+          });
+      }
+    };
+    return delAct;
+  };
+
   return (
     <>
       <Filter hdFiltChg={hdFiltChg} />
@@ -69,7 +88,7 @@ const App = () => {
         hdNameChg={hdNameChg}
         hdPhChg={hdPhChg}
       />
-      <Numbers shNaNum={prs} filBox={filBox} />
+      <Numbers shNaNum={prs} filBox={filBox} delPers={delPers} />
     </>
   );
 };
