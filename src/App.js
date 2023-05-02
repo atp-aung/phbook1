@@ -51,9 +51,28 @@ const App = () => {
           setNewPh("");
         });
       } else {
-        window.alert(`${perObj.name} already exist`);
-        setNewName("");
-        setNewPh("");
+        if (window.confirm(`${perObj.name} already. sure update num?`)) {
+          prsService
+            .update(prs[chkDup].id, perObj)
+            .then((response) => {
+              console.log(response);
+              prsService.getAll().then((response) => {
+                console.log(response);
+                setPersons(response.data);
+                setNewName("");
+                setNewPh("");
+              });
+            })
+            .catch((error) => {
+              console.log("fail update and already deleted");
+              prsService.getAll().then((response) => {
+                console.log(response);
+                setPersons(response.data);
+                setNewName("");
+                setNewPh("");
+              });
+            });
+        }
       }
       console.log(prs);
     }
