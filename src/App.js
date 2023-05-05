@@ -45,11 +45,17 @@ const App = () => {
       };
       const chkDup = prs.map((f) => f.name).indexOf(perObj.name);
       if (chkDup === -1) {
-        prsService.create(perObj).then((response) => {
-          setPersons(prs.concat(response.data));
-          setNewName("");
-          setNewPh("");
-        });
+        prsService
+          .create(perObj)
+          .then((response) => {
+            setPersons(prs.concat(response.data));
+            setNewName("");
+            setNewPh("");
+          })
+          .catch((error) => {
+            // this is the way to access the error message
+            console.log(error.response.data.error);
+          });
       } else {
         if (window.confirm(`${perObj.name} already. sure update num?`)) {
           prsService
