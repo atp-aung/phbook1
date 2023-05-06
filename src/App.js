@@ -56,7 +56,7 @@ const App = () => {
             setNotiFlag(1);
             setNotiMsg(`${perObj.name} is added`);
             setTimeout(() => {
-              setNotiMsg(null);
+              setNotiMsg("");
               setNotiFlag("");
             }, 3000);
             setNewName("");
@@ -83,9 +83,11 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
+                setNotiFlag(1);
                 setNotiMsg(`number of ${perObj.name} is updated`);
                 setTimeout(() => {
                   setNotiMsg(null);
+                  setNotiFlag("");
                 }, 3000);
                 setNewName("");
                 setNewPh("");
@@ -96,9 +98,11 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
+                setNotiFlag(2);
                 setNotiMsg(`error.response.data.error`);
                 setTimeout(() => {
                   setNotiMsg(null);
+                  setNotiFlag(2);
                 }, 5000);
                 setNewName("");
                 setNewPh("");
@@ -119,17 +123,21 @@ const App = () => {
             console.log("promise deleted");
             prsService.getAll().then((response) => {
               setPersons(response.data);
+              setNotiFlag(1);
               setNotiMsg(`${nn} is deleted`);
               setTimeout(() => {
                 setNotiMsg(null);
+                setNotiFlag("");
               }, 3000);
             });
           })
           .catch((error) => {
             console.log("fail del");
+            setNotiFlag(2);
             setNotiMsg(`${nn} is alerady deleted by other`);
             setTimeout(() => {
               setNotiMsg(null);
+              setNotiFlag("");
             }, 5000);
           });
       }
