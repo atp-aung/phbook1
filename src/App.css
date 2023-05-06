@@ -28,9 +28,22 @@
   color: #61dafb;
 }
 
-.errNoti {
+.notiGood {
   color: green;
   font-style: italic;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notiBad {
+  color: red;
+  font-style: italic;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 @keyframes App-logo-spin {

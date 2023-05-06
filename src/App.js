@@ -11,7 +11,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newPh, setNewPh] = useState("");
   const [filBox, setFilBox] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [notiMsg, setNotiMsg] = useState("");
+  const [notiFlag, setNotiFlag] = useState("");
 
   useEffect(() => {
     console.log("effect");
@@ -52,9 +53,11 @@ const App = () => {
           .create(perObj)
           .then((response) => {
             setPersons(prs.concat(response.data));
-            setErrorMessage(`${perObj.name} is added`);
+            setNotiFlag(1);
+            setNotiMsg(`${perObj.name} is added`);
             setTimeout(() => {
-              setErrorMessage(null);
+              setNotiMsg(null);
+              setNotiFlag("");
             }, 3000);
             setNewName("");
             setNewPh("");
@@ -62,9 +65,11 @@ const App = () => {
           .catch((error) => {
             // this is the way to access the error message
             console.log(error.response.data.error);
-            setErrorMessage(`${error.response.data.error}`);
+            setNotiFlag(2);
+            setNotiMsg(`${error.response.data.error}`);
             setTimeout(() => {
-              setErrorMessage(null);
+              setNotiMsg(null);
+              setNotiFlag("");
             }, 5000);
             setNewName("");
             setNewPh("");
@@ -78,9 +83,9 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
-                setErrorMessage(`number of ${perObj.name} is updated`);
+                setNotiMsg(`number of ${perObj.name} is updated`);
                 setTimeout(() => {
-                  setErrorMessage(null);
+                  setNotiMsg(null);
                 }, 3000);
                 setNewName("");
                 setNewPh("");
@@ -91,9 +96,9 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
-                setErrorMessage(`error.response.data.error`);
+                setNotiMsg(`error.response.data.error`);
                 setTimeout(() => {
-                  setErrorMessage(null);
+                  setNotiMsg(null);
                 }, 5000);
                 setNewName("");
                 setNewPh("");
@@ -114,17 +119,17 @@ const App = () => {
             console.log("promise deleted");
             prsService.getAll().then((response) => {
               setPersons(response.data);
-              setErrorMessage(`${nn} is deleted`);
+              setNotiMsg(`${nn} is deleted`);
               setTimeout(() => {
-                setErrorMessage(null);
+                setNotiMsg(null);
               }, 3000);
             });
           })
           .catch((error) => {
             console.log("fail del");
-            setErrorMessage(`${nn} is alerady deleted by other`);
+            setNotiMsg(`${nn} is alerady deleted by other`);
             setTimeout(() => {
-              setErrorMessage(null);
+              setNotiMsg(null);
             }, 5000);
           });
       }
@@ -134,7 +139,7 @@ const App = () => {
 
   return (
     <>
-      <Noti errorMessage={errorMessage} />
+      <Noti notiMsg={notiMsg} notiFlag={notiFlag} />
       <Filter hdFiltChg={hdFiltChg} />
       <AddForm
         addPrs={addPrs}
