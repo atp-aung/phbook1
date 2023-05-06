@@ -62,6 +62,12 @@ const App = () => {
           .catch((error) => {
             // this is the way to access the error message
             console.log(error.response.data.error);
+            setErrorMessage(`${error.response.data.error}`);
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
+            setNewName("");
+            setNewPh("");
           });
       } else {
         if (window.confirm(`${perObj.name} already. sure update num?`)) {
@@ -72,6 +78,10 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
+                setErrorMessage(`number of ${perObj.name} is updated`);
+                setTimeout(() => {
+                  setErrorMessage(null);
+                }, 3000);
                 setNewName("");
                 setNewPh("");
               });
@@ -81,6 +91,10 @@ const App = () => {
               prsService.getAll().then((response) => {
                 console.log(response);
                 setPersons(response.data);
+                setErrorMessage(`error.response.data.error`);
+                setTimeout(() => {
+                  setErrorMessage(null);
+                }, 5000);
                 setNewName("");
                 setNewPh("");
               });
@@ -100,10 +114,18 @@ const App = () => {
             console.log("promise deleted");
             prsService.getAll().then((response) => {
               setPersons(response.data);
+              setErrorMessage(`${nn} is deleted`);
+              setTimeout(() => {
+                setErrorMessage(null);
+              }, 3000);
             });
           })
           .catch((error) => {
             console.log("fail del");
+            setErrorMessage(`${nn} is alerady deleted by other`);
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
           });
       }
     };
