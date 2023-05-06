@@ -1,14 +1,17 @@
+import "./App.css";
 import { useState, useEffect } from "react";
 import prsService from "./services/persons";
 import AddForm from "./AddForm";
 import Numbers from "./Numbers";
 import Filter from "./Filter";
+import Noti from "./Noti";
 
 const App = () => {
   const [prs, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPh, setNewPh] = useState("");
   const [filBox, setFilBox] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     console.log("effect");
@@ -49,6 +52,10 @@ const App = () => {
           .create(perObj)
           .then((response) => {
             setPersons(prs.concat(response.data));
+            setErrorMessage(`${perObj.name} is added`);
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 3000);
             setNewName("");
             setNewPh("");
           })
@@ -105,6 +112,7 @@ const App = () => {
 
   return (
     <>
+      <Noti errorMessage={errorMessage} />
       <Filter hdFiltChg={hdFiltChg} />
       <AddForm
         addPrs={addPrs}
