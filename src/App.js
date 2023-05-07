@@ -102,7 +102,7 @@ const App = () => {
                 setNotiMsg(`${error.response.data.error} ghgjh`);
                 setTimeout(() => {
                   setNotiMsg(null);
-                  setNotiFlag(2);
+                  setNotiFlag("");
                 }, 5000);
                 setNewName("");
                 setNewPh("");
