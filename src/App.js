@@ -66,7 +66,7 @@ const App = () => {
             // this is the way to access the error message
             console.log(error.response.data.error);
             setNotiFlag(2);
-            setNotiMsg(`${error.response.data.error}`);
+            setNotiMsg(`rrr ${error.response.data.error}`);
             setTimeout(() => {
               setNotiMsg(null);
               setNotiFlag("");
