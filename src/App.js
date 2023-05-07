@@ -99,7 +99,7 @@ const App = () => {
                 console.log(response);
                 setPersons(response.data);
                 setNotiFlag(2);
-                setNotiMsg(`${error.response.data.error}`);
+                setNotiMsg(`${error.response.data.error} ghgjh`);
                 setTimeout(() => {
                   setNotiMsg(null);
                   setNotiFlag(2);
